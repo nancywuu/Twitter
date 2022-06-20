@@ -26,10 +26,13 @@
 }
 
 - (IBAction)didTapLogin:(id)sender {
+    NSLog(@"tapped!");
     [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
         if (success) {
+            NSLog(@"success tap");
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         } else {
+            NSLog(@"fail tap");
             NSLog(@"%@", error.localizedDescription);
         }
     }];
