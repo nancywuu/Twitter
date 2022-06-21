@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c3O-zL-0ZQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lbl-k5-U4i">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -145,8 +145,9 @@
                                                 <constraint firstItem="efu-wN-vPh" firstAttribute="top" secondItem="arA-Ik-seC" secondAttribute="top" constant="32" id="9JI-yX-mwF"/>
                                                 <constraint firstItem="Ntk-9b-Qlh" firstAttribute="top" secondItem="arA-Ik-seC" secondAttribute="top" constant="10" id="HfQ-vP-Bai"/>
                                                 <constraint firstItem="Alh-9p-FlD" firstAttribute="leading" secondItem="Ntk-9b-Qlh" secondAttribute="trailing" constant="10" id="I9k-PD-cVB"/>
-                                                <constraint firstItem="efu-wN-vPh" firstAttribute="leading" secondItem="Ntk-9b-Qlh" secondAttribute="trailing" constant="33" id="Jsv-bw-Fcf"/>
+                                                <constraint firstItem="efu-wN-vPh" firstAttribute="leading" secondItem="Ntk-9b-Qlh" secondAttribute="trailing" constant="10" id="Jsv-bw-Fcf"/>
                                                 <constraint firstItem="wa6-46-5jU" firstAttribute="leading" secondItem="ImJ-tS-U5P" secondAttribute="trailing" constant="10" id="NRB-DT-9S3"/>
+                                                <constraint firstAttribute="bottom" secondItem="efu-wN-vPh" secondAttribute="bottom" constant="50" id="O48-Ea-HM2"/>
                                                 <constraint firstItem="Ntk-9b-Qlh" firstAttribute="top" secondItem="arA-Ik-seC" secondAttribute="top" constant="10" id="UpP-MN-LBx"/>
                                                 <constraint firstItem="Alh-9p-FlD" firstAttribute="bottom" secondItem="ImJ-tS-U5P" secondAttribute="bottom" id="XRq-5s-Aey"/>
                                                 <constraint firstAttribute="trailing" secondItem="efu-wN-vPh" secondAttribute="trailing" constant="25" id="Xvi-3U-6Cg"/>
@@ -183,9 +184,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Gfg-LB-f5S">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Gfg-LB-f5S">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Nxh-Xr-X8n">
-                                <rect key="frame" x="276" y="11" width="83" height="34.5"/>
+                                <rect key="frame" x="16" y="11" width="83" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
@@ -193,6 +194,11 @@
                                     <action selector="didTapLogout:" destination="Lbl-k5-U4i" eventType="touchUpInside" id="pAy-sw-0Ps"/>
                                 </connections>
                             </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" image="square.and.pencil" catalog="system" id="8gf-wr-mhT">
+                            <connections>
+                                <segue destination="zhc-gs-RnP" kind="presentation" id="CzT-my-Tt4"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -202,6 +208,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1660" y="36.431784107946029"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="2JY-6m-p84">
+            <objects>
+                <viewController id="ZM6-fd-Hc3" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sTP-2e-exh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9gF-AT-vdt">
+                                <rect key="frame" x="16" y="179" width="343" height="159"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-2q-EOn">
+                                <rect key="frame" x="16" y="83" width="96" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oYc-1K-Q49"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3jU-VB-r1x">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="iFJ-cz-ZEo">
+                            <connections>
+                                <action selector="closeOut:" destination="ZM6-fd-Hc3" id="BMg-PP-cuQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="sPb-IU-C1c">
+                            <connections>
+                                <action selector="tweetOut:" destination="ZM6-fd-Hc3" id="Ffp-ou-HST"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="profileImage" destination="B4p-2q-EOn" id="Vhx-Sd-1DM"/>
+                        <outlet property="textField" destination="9gF-AT-vdt" id="Hbl-M0-sMZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a08-Rl-cd8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3391.1999999999998" y="56.221889055472268"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WUT-Ke-VeR">
@@ -221,6 +273,24 @@
             </objects>
             <point key="canvasLocation" x="860" y="36.431784107946029"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jL9-X4-Jc2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zhc-gs-RnP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JPx-BB-Pnc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZM6-fd-Hc3" kind="relationship" relationship="rootViewController" id="21S-Jo-zeG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fDe-30-bV2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2452" y="56.221889055472268"/>
+        </scene>
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
@@ -228,6 +298,10 @@
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="message-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
