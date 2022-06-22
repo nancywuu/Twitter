@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tweet.h"
 
 @interface TimelineViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+- (void)didTweet:(Tweet *)tweet;
 @end
