@@ -21,19 +21,27 @@
         self.currentTweet.retweeted = YES;
         self.currentTweet.retweetCount += 1;
         [self.retweets setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
+        [[APIManager shared] retweet:self.currentTweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error rting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully rted the following Tweet: %@", tweet.text);
+             }
+         }];
     } else {
         self.currentTweet.retweeted = NO;
         self.currentTweet.retweetCount -= 1;
         [self.retweets setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+        [[APIManager shared] unretweet:self.currentTweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error unrting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully unrted the following Tweet: %@", tweet.text);
+             }
+         }];
     }
-    [[APIManager shared] retweet:self.currentTweet completion:^(Tweet *tweet, NSError *error) {
-         if(error){
-              NSLog(@"Error rting tweet: %@", error.localizedDescription);
-         }
-         else{
-             NSLog(@"Successfully rted the following Tweet: %@", tweet.text);
-         }
-     }];
     
     NSLog(@"rt button tapped");
     [self refreshData];
@@ -44,20 +52,29 @@
         self.currentTweet.favorited = YES;
         self.currentTweet.favoriteCount += 1;
         [self.likes setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+        [[APIManager shared] favorite:self.currentTweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+             }
+         }];
         
     } else {
         self.currentTweet.favorited = NO;
         self.currentTweet.favoriteCount -= 1;
         [self.likes setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+        [[APIManager shared] unfavorite:self.currentTweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
+             }
+         }];
     }
-    [[APIManager shared] favorite:self.currentTweet completion:^(Tweet *tweet, NSError *error) {
-         if(error){
-              NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
-         }
-         else{
-             NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
-         }
-     }];
+    
     
     NSLog(@"like button tapped");
     [self refreshData];

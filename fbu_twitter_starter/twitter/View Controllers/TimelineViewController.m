@@ -75,6 +75,8 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     Tweet *current = self.arrayOfTweets[indexPath.row];
     //NSLog(@"%@", current.text);
+    
+    // formating for text
     cell.text.text = current.text;
     cell.authorName.text = current.user.name;
     cell.authorUser.text = [NSString stringWithFormat:@"%s/%@", "@", current.user.screenName];;
@@ -83,15 +85,26 @@
     NSString *URLString = current.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
     //NSData *urlData = [NSData dataWithContentsOfURL:url];
+    
+    // formatting for images
     [cell.profileImage setImageWithURL:url];
     cell.profileImage.layer.borderWidth = 1;
     cell.profileImage.layer.masksToBounds = false;
 //    cell.profileImage.layer.borderColor = UIColor.black.cgColor;
 //    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.height/2;
     cell.profileImage.clipsToBounds = true;
+    
+    // formatting for buttons
     [cell.likes setTitle:[NSString stringWithFormat:@"%d",current.favoriteCount] forState:UIControlStateNormal];
     [cell.retweets setTitle:[NSString stringWithFormat:@"%d",current.retweetCount] forState:UIControlStateNormal];
     [cell.comments setTitle:[NSString stringWithFormat:@"%d",current.commentCount] forState:UIControlStateNormal];
+    if(current.retweeted == YES){
+        [cell.retweets setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
+    }
+    if(current.favorited == YES){
+        [cell.likes setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+    }
+    
     cell.currentTweet = current;
     //cell.currentTweet = [[Tweet alloc] initWithDictionary:<#(nonnull NSDictionary *)#>:*dict];;
     return cell;

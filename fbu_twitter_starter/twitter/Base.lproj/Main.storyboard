@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lbl-k5-U4i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c3O-zL-0ZQ">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -139,15 +139,6 @@
                                                         <action selector="didTapLike:" destination="v4K-cQ-mBl" eventType="touchUpInside" id="R3b-d4-Oro"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALM-0Z-hEB">
-                                                    <rect key="frame" x="312" y="108" width="38" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="message-icon" title=""/>
-                                                    <connections>
-                                                        <action selector="didTapMessage:" destination="v4K-cQ-mBl" eventType="touchUpInside" id="fN9-me-kqO"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="wa6-46-5jU" firstAttribute="bottom" secondItem="ImJ-tS-U5P" secondAttribute="bottom" id="63R-GB-Otm"/>
@@ -180,7 +171,6 @@
                                             <outlet property="comments" destination="LPp-Eb-7Q9" id="hB7-5d-61u"/>
                                             <outlet property="date" destination="wa6-46-5jU" id="vfO-XC-0Df"/>
                                             <outlet property="likes" destination="eHZ-Um-8yp" id="uQf-nE-qXQ"/>
-                                            <outlet property="messageButton" destination="ALM-0Z-hEB" id="kfU-D5-O9K"/>
                                             <outlet property="profileImage" destination="Ntk-9b-Qlh" id="i6K-yw-MDF"/>
                                             <outlet property="retweets" destination="lhd-Fl-PpT" id="rKf-Rp-BVt"/>
                                             <outlet property="text" destination="efu-wN-vPh" id="p0A-3V-RT2"/>
@@ -320,7 +310,6 @@
         <image name="account-icon" width="30" height="25"/>
         <image name="favor-icon" width="30" height="30"/>
         <image name="message" catalog="system" width="128" height="113"/>
-        <image name="message-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
