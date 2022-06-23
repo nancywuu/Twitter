@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		7F4C44682861373900B7B291 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C44672861373900B7B291 /* Tweet.m */; };
 		7F4C446B28613BDA00B7B291 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C446A28613BDA00B7B291 /* TweetCell.m */; };
 		7F4C447128627DBF00B7B291 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C447028627DBF00B7B291 /* ComposeViewController.m */; };
+		7F4C44742863E07800B7B291 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4C44732863E07800B7B291 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		7F4C446A28613BDA00B7B291 /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		7F4C446F28627DBF00B7B291 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		7F4C447028627DBF00B7B291 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		7F4C44722863E07800B7B291 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		7F4C44732863E07800B7B291 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				6AD278D820BC4B950085BC29 /* AppDelegate.h */,
 				6AD278D920BC4B950085BC29 /* AppDelegate.m */,
 				6AD278DE20BC4B950085BC29 /* Main.storyboard */,
+				7F4C44722863E07800B7B291 /* DetailViewController.h */,
+				7F4C44732863E07800B7B291 /* DetailViewController.m */,
 				7F4C446F28627DBF00B7B291 /* ComposeViewController.h */,
 				7F4C447028627DBF00B7B291 /* ComposeViewController.m */,
 				7F4C446928613BDA00B7B291 /* TweetCell.h */,
@@ -176,6 +181,7 @@
 				6AD278D120BC4B950085BC29 /* Sources */,
 				6AD278D220BC4B950085BC29 /* Frameworks */,
 				6AD278D320BC4B950085BC29 /* Resources */,
+				D793348FE4DE95597A08555C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,6 +257,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D793348FE4DE95597A08555C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -265,6 +288,7 @@
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
 				7F4C44682861373900B7B291 /* Tweet.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
+				7F4C44742863E07800B7B291 /* DetailViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,

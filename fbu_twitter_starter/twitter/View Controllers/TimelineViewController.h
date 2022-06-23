@@ -12,4 +12,5 @@
 @interface TimelineViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (void)didTweet:(Tweet *)tweet;
+- (void)didChange;
 @end

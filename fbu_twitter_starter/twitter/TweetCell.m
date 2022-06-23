@@ -79,13 +79,24 @@
     NSLog(@"like button tapped");
     [self refreshData];
 }
-- (IBAction)didTapMessage:(id)sender {
-}
 
 - (void)refreshData {
     [self.likes setTitle:[NSString stringWithFormat:@"%d",self.currentTweet.favoriteCount] forState:UIControlStateNormal];
     [self.retweets setTitle:[NSString stringWithFormat:@"%d",self.currentTweet.retweetCount] forState:UIControlStateNormal];
     [self.comments setTitle:[NSString stringWithFormat:@"%d",self.currentTweet.commentCount] forState:UIControlStateNormal];
+}
+
+- (void)changeDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"E MMM d HH:mm:ss Z y"];
+    NSDate *temp = [[NSDate alloc] init];
+    temp = [dateFormatter dateFromString:self.currentTweet.createdAtString];
+    NSString *shortTimeAgo = [temp shortTimeAgoSinceNow];
+    //NSLog(@"%@", shortTimeAgo);
+    self.date.text = shortTimeAgo;
+
+
+    //NSString *dateString = [timeFormatter stringFromDate: localDate];
 }
 
 - (void)awakeFromNib {

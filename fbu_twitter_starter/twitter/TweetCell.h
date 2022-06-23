@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "DateTools.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *likes;
 @property (weak, nonatomic) IBOutlet UIButton *messageButton;
 
+- (void)changeDate;
 
 @end
 

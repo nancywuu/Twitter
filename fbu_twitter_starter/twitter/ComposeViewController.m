@@ -9,7 +9,7 @@
 #import "ComposeViewController.h"
 #import "APIManager.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 
@@ -32,9 +32,24 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.textField.text = @"Type your thoughts here...";
+    self.textField.textColor = [UIColor lightGrayColor];
+    self.textField.delegate = self;
+    
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    //NSLog(@"hit begin editing");
+    if([textView.text isEqualToString: @"Type your thoughts here..."]) {
+        //NSLog(@"if passed");
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+    [textView becomeFirstResponder];
 }
 
 /*

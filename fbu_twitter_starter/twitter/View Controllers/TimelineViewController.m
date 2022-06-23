@@ -7,6 +7,7 @@
 //
 
 #import "TimelineViewController.h"
+#import "DetailViewController.h"
 #import "ComposeViewController.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
@@ -14,7 +15,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <DetailViewControllerDelegate, ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *arrayOfTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -30,6 +31,11 @@
     appDelegate.window.rootViewController = loginViewController;
     [[APIManager shared] logout];
 }
+//- (void) viewDidAppear:(BOOL) animated{
+//    [super viewDidAppear: animated];
+//    // Get timeline
+//    [self fetchTweets];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,12 +43,19 @@
     self.tableView.delegate = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self fetchTweets];
+    //[[UINavigationBar appearance] setTranslucent:NO];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     NSLog(@"viewDidLoad Timeline");
     
 }
+
+//- (void) viewDidAppear:(BOOL) animated{
+//    [super viewDidAppear: animated];
+//    //[self fetchTweets];
+//    [self.tableView reloadData];
+//}
 
 - (void)fetchTweets {
     // Get timeline
@@ -66,14 +79,20 @@
 }
 
 - (void)didTweet:(Tweet *)tweet {
-    NSLog(@"😎we've tweeted!");
-    NSLog(@"%@", tweet.text);
-    //[self fetchTweets];
+    [self fetchTweets];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"😎we've tweeted!");
+    }];
+}
+
+- (void)didChange {
+    [self fetchTweets];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     Tweet *current = self.arrayOfTweets[indexPath.row];
+    cell.currentTweet = current;
     //NSLog(@"%@", current.text);
     
     // formating for text
@@ -81,6 +100,9 @@
     cell.authorName.text = current.user.name;
     cell.authorUser.text = [NSString stringWithFormat:@"%s/%@", "@", current.user.screenName];;
     cell.date.text = current.createdAtString;
+    //NSLog(@"%@", current.createdAtString);
+    [cell changeDate];
+    
     //cell.retweets.value = current.retweetCount;
     NSString *URLString = current.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
@@ -98,6 +120,8 @@
     [cell.likes setTitle:[NSString stringWithFormat:@"%d",current.favoriteCount] forState:UIControlStateNormal];
     [cell.retweets setTitle:[NSString stringWithFormat:@"%d",current.retweetCount] forState:UIControlStateNormal];
     [cell.comments setTitle:[NSString stringWithFormat:@"%d",current.commentCount] forState:UIControlStateNormal];
+    [cell.retweets setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    [cell.likes setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
     if(current.retweeted == YES){
         [cell.retweets setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
     }
@@ -105,7 +129,6 @@
         [cell.likes setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
     }
     
-    cell.currentTweet = current;
     //cell.currentTweet = [[Tweet alloc] initWithDictionary:<#(nonnull NSDictionary *)#>:*dict];;
     return cell;
 }
@@ -131,9 +154,19 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    if([sender isKindOfClass:[TweetCell class]]){
+        TweetCell *cell = sender;
+        NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    //     Pass the selected object to the new view controller.
+        Tweet *dataToPass = self.arrayOfTweets[path.row];
+        DetailViewController *detailVC = [segue destinationViewController];
+        detailVC.delegate = self;
+        detailVC.detailTweet = dataToPass;
+    } else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
 }
 
 @end
