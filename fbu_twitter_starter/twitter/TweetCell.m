@@ -99,9 +99,22 @@
     //NSString *dateString = [timeFormatter stringFromDate: localDate];
 }
 
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    //TODO: Call method delegate
+    NSLog(@"TWEETCELL did tap user profile");
+    NSLog(@"%@", self.currentTweet.user.screenName);
+    [self.delegate tweetCell:self didTap:self.currentTweet.user];
+    
+    //[self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profileImage setUserInteractionEnabled:YES];
+    NSLog(@"Awake from nib!");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -15,7 +15,11 @@
 + (instancetype)shared;
 
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
+- (void)getUser:(void(^)(NSString *screenName, NSError *error))completion;
+- (void)getImageFromUser:(NSString *)screenName completion:(void (^)(User *user, NSError *error))completion;
+- (void)getUserTimeline:(NSString *)screenName completion:(void(^)(NSArray *tweets, NSError *error))completion;
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion;
+- (void)getMentionTimeline:(void(^)(NSArray *tweets, NSError *error))completion;
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;

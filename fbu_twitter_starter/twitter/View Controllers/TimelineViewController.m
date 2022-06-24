@@ -8,14 +8,16 @@
 
 #import "TimelineViewController.h"
 #import "DetailViewController.h"
+#import "ProfileViewController.h"
 #import "ComposeViewController.h"
+#import "ReplyViewController.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 
-@interface TimelineViewController () <DetailViewControllerDelegate, ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <TweetCellDelegate, ReplyViewControllerDelegate, DetailViewControllerDelegate, ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *arrayOfTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -51,11 +53,14 @@
     
 }
 
-//- (void) viewDidAppear:(BOOL) animated{
-//    [super viewDidAppear: animated];
-//    //[self fetchTweets];
-//    [self.tableView reloadData];
-//}
+//TimelineViewController.h
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    // TODO: Perform segue to profile view controller
+    NSLog(@"segue activated");
+    NSLog(@"%@", user.screenName);
+    
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 
 - (void)fetchTweets {
     // Get timeline
@@ -89,16 +94,21 @@
     [self fetchTweets];
 }
 
+- (void)didReplyChange {
+    [self fetchTweets];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     Tweet *current = self.arrayOfTweets[indexPath.row];
+    cell.delegate = self;
     cell.currentTweet = current;
     //NSLog(@"%@", current.text);
     
     // formating for text
     cell.text.text = current.text;
     cell.authorName.text = current.user.name;
-    cell.authorUser.text = [NSString stringWithFormat:@"%s/%@", "@", current.user.screenName];;
+    cell.authorUser.text = [NSString stringWithFormat:@"%s%@", "@", current.user.screenName];
     cell.date.text = current.createdAtString;
     //NSLog(@"%@", current.createdAtString);
     [cell changeDate];
@@ -157,15 +167,26 @@
     if([sender isKindOfClass:[TweetCell class]]){
         TweetCell *cell = sender;
         NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    //     Pass the selected object to the new view controller.
         Tweet *dataToPass = self.arrayOfTweets[path.row];
         DetailViewController *detailVC = [segue destinationViewController];
         detailVC.delegate = self;
         detailVC.detailTweet = dataToPass;
+    } else if([sender isKindOfClass:[UIButton class]]) {
+        TweetCell *cell = sender;
+        NSIndexPath *path = [self.tableView indexPathForCell:cell];
+        Tweet *dataToPass = self.arrayOfTweets[path.row];
+        ReplyViewController *replyVC = [segue destinationViewController];
+        replyVC.delegate = self;
+        replyVC.currentTweet = dataToPass;
     } else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+    } else if (([segue.identifier isEqualToString:@"profileSegue"])){
+        NSLog(@"timeline segue activated");
+        User *temp = sender;
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.user = temp;
     }
 }
 

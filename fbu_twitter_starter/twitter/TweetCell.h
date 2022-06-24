@@ -11,8 +11,10 @@
 #import "DateTools.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol TweetCellDelegate;
 
 @interface TweetCell : UITableViewCell
+@property (nonatomic, weak) id<TweetCellDelegate> delegate;
 @property (nonatomic, strong) Tweet *currentTweet;
 @property (weak, nonatomic) IBOutlet UILabel *authorName;
 @property (weak, nonatomic) IBOutlet UILabel *authorUser;
@@ -26,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)changeDate;
 
+@end
+
+@protocol TweetCellDelegate
+// TODO: Add required methods the delegate needs to implement
+- (void)tweetCell:(TweetCell *) tweetCell didTap: (User *)user;
 @end
 
 NS_ASSUME_NONNULL_END

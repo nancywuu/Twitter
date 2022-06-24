@@ -69,6 +69,65 @@ static NSString * const baseURLString = @"https://api.twitter.com";
    }];
 }
 
+- (void)getUserTimeline:(NSString *)screenName completion:(void(^)(NSArray *tweets, NSError *error))completion {
+    NSString *temp = @"1.1/statuses/user_timeline.json";
+    [self GET:temp
+   parameters:@{@"screen_name": screenName} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+           // Success
+           NSMutableArray *tweets = [Tweet tweetsWithArray:tweetDictionaries];
+        
+           completion(tweets, nil);
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+   }];
+}
+
+
+- (void)getUser:(void(^)(NSString *screenName, NSError *error))completion {
+    
+    [self GET:@"1.1/account/settings.json"
+        parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable temp) {
+           // Success
+           NSString *screenName = temp[@"screen_name"];
+        
+           completion(screenName, nil);
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+   }];
+}
+
+- (void)getMentionTimeline:(void(^)(NSArray *tweets, NSError *error))completion {
+    
+    [self GET:@"1.1/statuses/mentions_timeline.json?count=10"
+        parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+           // Success
+           NSMutableArray *tweets = [Tweet tweetsWithArray:tweetDictionaries];
+        
+           completion(tweets, nil);
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+   }];
+}
+
+- (void)getImageFromUser:(NSString *)screenName completion:(void (^)(User *user, NSError *error))completion {
+    NSString *temp = @"1.1/users/show.json"; // [NSString stringWithFormat:@"%s/%@", "1.1/users/show.json?screen_name=", screenName];
+    //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%s/%@", "https://image.tmdb.org/t/p/w500", dict[@"poster_path"]]];
+    [self GET:temp
+   parameters:@{@"screen_name": screenName} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable temp) {
+           // Success
+           User *user = [[User alloc] initWithDictionary:temp];
+        
+           completion(user, nil);
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+   }];
+}
+
+
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
 
     NSString *urlString = @"1.1/favorites/create.json";

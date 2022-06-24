@@ -8,10 +8,12 @@
 
 #import "ComposeViewController.h"
 #import "APIManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (strong, nonatomic) NSString *ourName;
 
 @end
 
@@ -39,7 +41,32 @@
     self.textField.text = @"Type your thoughts here...";
     self.textField.textColor = [UIColor lightGrayColor];
     self.textField.delegate = self;
-    
+    [[APIManager shared] getUser:^(NSString *screenName, NSError *error) {
+        if (screenName) {
+//            NSLog(@"SCNREE NAME");
+//            NSLog(@"%@", screenName);
+            //self.ourName = screenName;
+            [[APIManager shared] getImageFromUser:screenName completion:^(User *user, NSError *error) {
+                if (user) {
+//                    NSLog(@"USER NAME");
+//                    NSLog(@"%@", screenName);
+                    NSString *URLString = user.profilePicture;
+                    
+                    [self setPFP:URLString];
+                } else {
+                    NSLog(@"😫Error getting url from user : %@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"😫Error getting username: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)setPFP:(NSString *)urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"%@", url);
+    [self.profileImage setImageWithURL:url];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
