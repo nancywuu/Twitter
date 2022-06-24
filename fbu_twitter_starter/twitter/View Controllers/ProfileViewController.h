@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *joinDate;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (nonatomic, strong) User *user;
+@property BOOL isFromTab;
+@property BOOL isFromTimeline;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -120,7 +120,6 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title=""/>
                                                     <connections>
-                                                        <action selector="didTapComment:" destination="v4K-cQ-mBl" eventType="touchUpInside" id="dQC-N1-M3H"/>
                                                         <segue destination="UzY-6L-j3O" kind="presentation" id="8ck-ss-VHv"/>
                                                     </connections>
                                                 </button>
@@ -263,10 +262,9 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Replying to.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpU-ad-bsd">
-                                            <rect key="frame" x="82" y="65" width="95" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Replying to.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpU-ad-bsd">
+                                            <rect key="frame" x="82" y="65" width="71" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -277,6 +275,7 @@
                                         <constraint firstItem="to3-Ng-1jK" firstAttribute="leading" secondItem="Qsp-bt-0uF" secondAttribute="trailing" constant="10" id="66g-7T-fSu"/>
                                         <constraint firstItem="C2Y-VR-Tv0" firstAttribute="top" secondItem="3uy-pB-6S1" secondAttribute="top" constant="10" id="9KL-Sa-eoG"/>
                                         <constraint firstItem="Y0g-Dl-5bQ" firstAttribute="top" secondItem="3uy-pB-6S1" secondAttribute="top" constant="10" id="EW4-yv-GEO"/>
+                                        <constraint firstItem="dpU-ad-bsd" firstAttribute="leading" secondItem="3uy-pB-6S1" secondAttribute="leading" constant="20" id="JfR-iG-icO"/>
                                         <constraint firstItem="RaB-aD-xuX" firstAttribute="leading" secondItem="C2Y-VR-Tv0" secondAttribute="trailing" constant="10" id="KMT-29-a5g"/>
                                         <constraint firstItem="Qsp-bt-0uF" firstAttribute="top" secondItem="3uy-pB-6S1" secondAttribute="top" constant="10" id="Mtg-IB-xlj"/>
                                         <constraint firstItem="Y0g-Dl-5bQ" firstAttribute="bottom" secondItem="RaB-aD-xuX" secondAttribute="bottom" id="SKh-T8-LgS"/>
@@ -287,6 +286,7 @@
                                         <constraint firstItem="Qsp-bt-0uF" firstAttribute="top" secondItem="3uy-pB-6S1" secondAttribute="top" constant="10" id="uUQ-qW-srR"/>
                                         <constraint firstItem="C2Y-VR-Tv0" firstAttribute="leading" secondItem="Qsp-bt-0uF" secondAttribute="trailing" constant="10" id="vHG-TY-iAx"/>
                                         <constraint firstItem="RaB-aD-xuX" firstAttribute="top" secondItem="3uy-pB-6S1" secondAttribute="top" constant="10" id="vrl-sM-owv"/>
+                                        <constraint firstItem="dpU-ad-bsd" firstAttribute="top" secondItem="to3-Ng-1jK" secondAttribute="bottom" constant="10" id="xqa-VV-54a"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -309,6 +309,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-Kj-b5L">
+                                <rect key="frame" x="92" y="299" width="85" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reply"/>
+                                <connections>
+                                    <action selector="didReply:" destination="UzY-6L-j3O" eventType="touchUpInside" id="0he-ov-YBI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mZi-9c-Siw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -340,7 +349,7 @@
                     <connections>
                         <segue destination="FTQ-G1-N2b" kind="relationship" relationship="viewControllers" id="9DO-ZJ-U0U"/>
                         <segue destination="fzk-9L-sKg" kind="relationship" relationship="viewControllers" id="cBd-Zn-qmJ"/>
-                        <segue destination="L4H-gk-2Zu" kind="relationship" relationship="viewControllers" id="T5d-48-zW0"/>
+                        <segue destination="L4H-gk-2Zu" kind="relationship" relationship="viewControllers" destinationCreationSelector="profileFromTab" id="T5d-48-zW0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zzc-gV-EHV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -554,9 +563,6 @@
                                                     <rect key="frame" x="16" y="111" width="44" height="28"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title=""/>
-                                                    <connections>
-                                                        <action selector="didTapComment:" destination="xXM-F3-WwV" eventType="touchUpInside" id="OVe-Uy-M4S"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OcI-Gl-PEn">
                                                     <rect key="frame" x="67" y="61.5" width="54" height="62.5"/>
@@ -657,7 +663,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHS-35-jFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="36.431784107946029"/>
+            <point key="canvasLocation" x="852" y="161"/>
         </scene>
         <!--Profile-->
         <scene sceneID="7h3-kE-xGw">

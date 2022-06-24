@@ -56,8 +56,6 @@
 //TimelineViewController.h
 - (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
     // TODO: Perform segue to profile view controller
-    NSLog(@"segue activated");
-    NSLog(@"%@", user.screenName);
     
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
@@ -85,12 +83,9 @@
 
 - (void)didTweet:(Tweet *)tweet {
     [self fetchTweets];
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"😎we've tweeted!");
-    }];
 }
 
-- (void)didChange {
+- (void)didReply:(Tweet *)tweet {
     [self fetchTweets];
 }
 
@@ -183,10 +178,13 @@
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
     } else if (([segue.identifier isEqualToString:@"profileSegue"])){
-        NSLog(@"timeline segue activated");
         User *temp = sender;
         ProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.isFromTimeline = YES;
         profileViewController.user = temp;
+    } else if (([segue.identifier isEqualToString:@"profileFromTab"])){
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.isFromTab = YES;
     }
 }
 

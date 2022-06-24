@@ -12,7 +12,6 @@
 @interface ProfileViewController () <DetailViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *arrayOfTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic) BOOL *isFromTab;
 
 @end
 
@@ -20,30 +19,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     NSLog(@"loaded in PROFILE");
-    [[APIManager shared] getUser:^(NSString *screenName, NSError *error) {
-        if (screenName) {
-//            NSLog(@"SCNREE NAME");
-//            NSLog(@"%@", screenName);
-            //self.ourName = screenName;
-            [[APIManager shared] getImageFromUser:screenName completion:^(User *user, NSError *error) {
-                if (user) {
-//                    NSLog(@"USER NAME");
-//                    NSLog(@"%@", screenName);
-                    //NSString *URLString = user.profilePicture;
-                    NSLog(@"setting user");
-                    self.user = user;
-                    [self setProfile];
-                } else {
-                    NSLog(@"😫Error getting url from user : %@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"😫Error getting username: %@", error.localizedDescription);
-        }
-    }];
+    if(!self.isFromTimeline){
+        [[APIManager shared] getUser:^(NSString *screenName, NSError *error) {
+            if (screenName) {
+                [[APIManager shared] getImageFromUser:screenName completion:^(User *user, NSError *error) {
+                    if (user) {
+                        NSLog(@"setting user");
+                        self.user = user;
+                        [self setProfile];
+                    } else {
+                        NSLog(@"😫Error getting url from user : %@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                NSLog(@"😫Error getting username: %@", error.localizedDescription);
+            }
+        }];
+    } else {
+        [self setProfile];
+    }
+    
     
     // Do any additional setup after loading the view.
 }
@@ -53,6 +52,8 @@
 }
 
 - (void)setProfile {
+    
+    
     self.userName.text = self.user.name;
     self.userUser.text = [NSString stringWithFormat:@"%s%@", "@", self.user.screenName];
     //[NSString stringWithFormat:@"%s/%@", "@", current.user.screenName]

@@ -10,12 +10,6 @@
 #import "APIManager.h"
 
 @implementation TweetCell
-- (IBAction)didTapComment:(id)sender {
-    self.currentTweet.commented = YES;
-    self.currentTweet.commentCount += 1;
-    NSLog(@"comment button tapped");
-    [self refreshData];
-}
 - (IBAction)didTapRetweet:(id)sender {
     if(self.currentTweet.retweeted == NO){
         self.currentTweet.retweeted = YES;

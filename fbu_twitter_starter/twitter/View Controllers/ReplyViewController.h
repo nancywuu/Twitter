@@ -11,7 +11,7 @@
 #import "DateTools.h"
 NS_ASSUME_NONNULL_BEGIN
 @protocol ReplyViewControllerDelegate
-- (void)didReplyChange;
+- (void)didReply:(Tweet *)tweet;
 @end
 
 @interface ReplyViewController : UIViewController
