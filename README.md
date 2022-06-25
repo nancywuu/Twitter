@@ -47,7 +47,7 @@ The following **additional** features are implemented:
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
 1. Code styling
-2. Organizing storyboard/using views efficiently
+2. How to make sense of many segues and view controllers
 
 ## Video Walkthrough
 
@@ -55,7 +55,8 @@ Here's a walkthrough of implemented user stories:
 
 ![Kapture 2022-06-24 at 16 51 50](https://user-images.githubusercontent.com/65429031/175749519-1fe1c3a1-6b44-4215-b82f-3853e66bfd40.gif)
 ![Kapture 2022-06-24 at 16 56 03](https://user-images.githubusercontent.com/65429031/175749617-7b7e2143-916e-4f2a-912b-3a22ef310475.gif)
-![Kapture 2022-06-24 at 16 59 32](https://user-images.githubusercontent.com/65429031/175749811-0619a2bf-812f-49e2-892b-62c830166272.gif)
+![Kapture 2022-06-24 at 19 24 49](https://user-images.githubusercontent.com/65429031/175754770-0fe6e606-f2d1-49cd-aa57-d25f82643002.gif)
+
 
 GIF created with [Kap](https://getkap.co/).
 
