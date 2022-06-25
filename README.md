@@ -55,8 +55,8 @@ Please list two areas of the assignment you'd like to **discuss further with you
 Here's a walkthrough of implemented user stories:
 
 ![Kapture 2022-06-24 at 16 51 50](https://user-images.githubusercontent.com/65429031/175749519-1fe1c3a1-6b44-4215-b82f-3853e66bfd40.gif)
-![Kapture 2022-06-24 at 16 56 03](https://user-images.githubusercontent.com/65429031/175749617-7b7e2143-916e-4f2a-912b-3a22ef310475.gif)
 ![Kapture 2022-06-24 at 19 24 49](https://user-images.githubusercontent.com/65429031/175754770-0fe6e606-f2d1-49cd-aa57-d25f82643002.gif)
+![Kapture 2022-06-24 at 19 49 53](https://user-images.githubusercontent.com/65429031/175755592-44b32e3b-9a22-491f-b706-9aabfe657624.gif)
 
 
 GIF created with [Kap](https://getkap.co/).
